@@ -1,0 +1,71 @@
+{{!< default}}
+{{! The tag above means - insert everything in this file into the {body} of the default.hbs template }}
+
+<!-- start content area -->
+<div class="main-content-area single-post archive-page">
+    {{#post}}
+    <article>
+        <div class="post-head{{#unless feature_image}} no-image{{/unless}}" {{#if feature_image}}style="background-image:url({{feature_image}});"{{/if}}>
+            <div class="container align-center">
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-10">
+                        <h1 class="title page-title">{{title}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-1 col-md-10">
+                    <div class="post-content">
+                        {{content}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    {{/post}}
+    <div class="user-list-wrap">
+        <div class="container">
+            <div class="row is-flex">
+                {{#get "authors" limit="all" include="count.posts" order="count.posts desc"}}
+                {{#foreach authors}}
+                <div class="col-sm-6 col-md-6 col-xs-12">
+                    <div class="about-author clearfix">
+                        {{#if profile_image}}
+                            <a href="{{url}}" title="{{name}}"><img src="{{profile_image}}" alt="Author image" class="avatar pull-left"></a>
+                            {{else}}
+                            <a href="{{url}}" title="{{name}}"><img src="{{asset "images/default-user-image.jpg"}}" alt="Author image" class="avatar pull-left"></a>
+                        {{/if}}
+                        <div class="details">
+                            <h4 class="author h4"><a href="{{url}}">{{name}}</a></h4>
+                            {{#if bio}}
+                            <div class="bio">
+                                {{{bio}}}
+                            </div>
+                            {{/if}}
+                            <ul class="meta-info">
+                                {{#if twitter}}
+                                <li><a href="{{twitter_url}}" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                                {{/if}}
+                                {{#if facebook}}
+                                <li><a href="{{facebook_url}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                {{/if}}
+                                {{#if website}}
+                                <li class="website"><a href="{{website}}" target="_blank"><i class="fa fa-globe"></i></a></li>
+                                {{/if}}
+                                {{#if location}}
+                                <li class="location"><i class="fa fa-map-marker"></i>{{location}}</li>
+                                {{/if}}
+                                <li class="post-count"><i class="fa fa-pencil"></i>{{plural count.posts empty=(t "0 Post") singular=(t "1 Post") plural=(t "% Posts")}}</li>
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                {{/foreach}}
+                {{/get}}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end content area -->

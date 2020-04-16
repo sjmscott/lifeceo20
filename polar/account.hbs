@@ -1,0 +1,60 @@
+{{!< default}}
+{{! The tag above means - insert everything in this file into the {body} of the default.hbs template }}
+
+<!-- start content area -->
+<!-- start cover -->
+<section class="cover cover-home cover-small {{#if @site.cover_image}}has-image{{/if}}" {{#if @site.cover_image}} style="background-image: url({{@site.cover_image}});"{{/if}}>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<div class="cover-content-wrap align-center">
+                    {{#if @member.paid}}
+					<h1 class="intro-title">{{t "Nice, you're a subscriber!"}}</h1>
+					<P class="intro-description">
+						{{t "Hey! You are currently logged in with"}} <strong>{{@member.email}}</strong>. {{t "You have an active"}} <strong>{{@site.title}}</strong> {{t "account with access to all areas. You're all set, but if you need any help, get in touch with us and we'd be happy to help."}}
+					</P>
+                    {{else if @member}}
+                    <h1 class="intro-title">{{t "Nice, you're a subscriber!"}}</h1>
+					<P class="intro-description">
+						{{t "Hey! You are currently logged in with"}} <strong>{{@member.email}}</strong>. {{t "You have subscribed to free updates from"}} {{@site.title}}. {{t "Subscribe to paid plan to unlock full access."}}
+					</P>
+                    
+                    {{/if}}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end cover -->
+<div class="main-content-area">
+    <div class="container">
+        {{#if @member.paid}}
+        <div class="row">
+            <div class="col col-12">
+                <div class="text-center paid-member-reading-message">
+                    <h4 class="message">{{t "Read some exclusive posts only for paying member or"}}</h4>
+                    <a href="{{@site.url}}" class="btn btn-primary">{{t "Return to home page"}}</a>
+                </div>
+            </div>
+        </div>
+        {{#get "posts" limit="10" filter="visibility:paid" include="tags,authors"}}
+        {{> loop}}
+        {{/get}}
+
+        {{else if @member}}
+        <div class="row is-flex">
+            {{!-- Logged in, not paying: Check out --}}
+            <div class="col-sm-6 col-md-4 col-xs-12">
+                {{> members/pricing-table-monthly}}
+            </div>
+            <div class="col-sm-6 col-md-4 col-xs-12">
+                {{> members/pricing-table-yearly}}
+            </div>
+        </div>
+        {{else}}
+            {{!-- Not logged in: Redirect to signin --}}
+            <script>window.location = '{{@site.url}}/signin/';</script>
+        {{/if}}
+    </div>
+</div>
+<!-- end content area -->

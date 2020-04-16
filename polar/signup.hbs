@@ -1,0 +1,58 @@
+{{!< default}}
+{{! The tag above means - insert everything in this file into the {body} of the default.hbs template }}
+
+<!-- start content area -->
+<!-- start cover -->
+<section class="cover cover-home cover-small {{#if @site.cover_image}}has-image{{/if}}" {{#if @site.cover_image}} style="background-image: url({{@site.cover_image}});"{{/if}}>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<div class="cover-content-wrap align-center">
+					<h1 class="intro-title">{{t "Choose your subscription"}}</h1>
+					<P class="intro-description">
+						{{t "Unlock full access to"}} {{@site.title}} {{t "and see the entire library of members-only content & updates"}}
+					</P>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- end cover -->
+<div class="main-content-area">
+    <div class="container">
+        <div class="row is-flex">
+            {{#if @member.paid}}
+
+                {{!-- Logged in, paying member: Redirect home --}}
+                <script>window.location = '{{@site.url}}/';</script>
+
+            {{else if @member}}
+
+                {{!-- Logged in, not paying: Check out --}}
+                <div class="col-sm-6 col-md-4 col-xs-12">
+                    {{> members/pricing-table-monthly}}
+                </div>
+                <div class="col-sm-6 col-md-4 col-xs-12">
+                    {{> members/pricing-table-yearly}}
+                </div>
+
+            {{else}}
+            {{!-- Logged in, not paying: Check out --}}
+                <div class="col-sm-6 col-md-4 col-xs-12">
+                    {{> members/pricing-table-free}}
+                </div>
+                <div class="col-sm-6 col-md-4 col-xs-12">
+                    {{> members/pricing-table-monthly}}
+                </div>
+                <div class="col-sm-6 col-md-4 col-xs-12">
+                    {{> members/pricing-table-yearly}}
+                </div>
+                <div class="col-xs-12 text-center sign-in-link">
+                    {{t "Already have an account?"}} <a href="{{@site.url}}/signin/">{{t "Sign in"}}</a>
+                </div>
+
+            {{/if}}
+        </div>
+    </div>
+</div>
+<!-- end content area -->

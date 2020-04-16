@@ -1,0 +1,21 @@
+<!-- start cover -->
+{{#tag}}
+<section class="cover cover-tag {{#if feature_image}}has-image{{/if}}" {{#if feature_image}} style="background-image: url({{feature_image}});"{{/if}}>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<div class="cover-content-wrap align-center">
+					<h1 class="tag-title">{{t "Tag:"}} {{name}}</h1>
+					<div class="meta-info">
+						<span>{{t "Total"}} {{plural ../pagination.total empty=(t "0 Post") singular=(t "1 Post") plural=(t "% Posts")}}</span>
+					</div>
+					{{#if description}}
+					<p class="tag-description">{{description}}</p>
+					{{/if}}
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{{/tag}}
+<!-- end cover -->

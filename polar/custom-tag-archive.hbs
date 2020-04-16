@@ -1,0 +1,57 @@
+{{!< default}}
+{{! The tag above means - insert everything in this file into the {body} of the default.hbs template }}
+
+<!--start content area -->
+<div class="main-content-area single-post archive-page">
+    {{#post}}
+    <article>
+        <div class="post-head{{#unless feature_image}} no-image{{/unless}}" {{#if feature_image}}style="background-image:url({{feature_image}});"
+            {{/if}}>
+            <div class="container align-center">
+                <div class="row">
+                    <div class="col-md-offset-1 col-md-10">
+                        <h1 class="title page-title">{{title}}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-offset-1 col-md-10">
+                    <div class="post-content">
+                        {{content}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </article>
+    {{/post}}
+    <div class="tag-list-wrap">
+        <div class="container">
+            <div class="row is-flex">
+                {{#get "tags" limit="all" include="count.posts" order="count.posts desc"}}
+                {{#foreach tags}}
+                <div class="col-sm-6 col-md-4 col-xs-12">
+                    <article class="post post-card">
+                        {{#if feature_image}}
+                        <a href="{{url absolute="true"}}" class="permalink">
+                            <div class="featured-image" style="background-image: url({{feature_image}})"></div>
+                        </a>
+                        {{/if}}
+                        <div class="content-wrap">
+                            <div class="entry-header align-center">
+                                <span class="category"><a href="{{url absolute="true"}}" rel="bookmark">{{plural count.posts empty=(t "0 Post") singular=(t "1 Post") plural=(t "% Posts")}}</a></span>
+					            <h2 class="title h4"><a href="{{url absolute="true"}}" rel="bookmark">{{name}}</a></h2>
+                                {{#if description}}
+                                <div class="tag-description">{{description}}</div>
+                                {{/if}}
+                            </div>
+                        </div>
+                    </article>
+                </div>
+                {{/foreach}}
+                {{/get}}
+            </div>
+        </div>
+    </div>
+</div>

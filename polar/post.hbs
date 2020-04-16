@@ -1,0 +1,70 @@
+{{!< default}}
+{{! The tag above means - insert everything in this file into the {body} of the default.hbs template }}
+
+<!-- start content area -->
+{{#post}}
+	<div class="main-content-area single-post">
+		<article>
+			<div class="post-head{{#unless feature_image}} no-image{{/unless}}" {{#if feature_image}}style="background-image:url({{feature_image}});"{{/if}}>
+				<div class="container align-center">
+					<div class="row">
+						<div class="col-md-offset-1 col-md-10">
+							{{#if tags}}
+							<span class="category">
+								{{tags separator=", "}}
+							</span>
+							{{/if}}
+							<h1 class="title">{{title}}</h1>
+							
+							<div class="post-meta">
+								{{#foreach authors}}
+								<a class="author" href="{{url}}" rel="author">
+									<span class="name">{{name}}</span>
+								</a>
+								{{/foreach}}
+								<time class="time" datetime="{{date format="YYYY-MM-DD HH:MM:SS"}}" itemprop="datePublished">{{date format="MMMM DD, YYYY"}}</time>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-offset-1 col-md-10">
+						<div class="post-content">
+							{{#if access}}
+							{{content}}
+							{{else}}
+							<div class="excerpt">
+							{{excerpt}}
+							</div>
+							
+							<div class="post-upgrade-cta-box text-center">
+								{{#if @member}}
+								<h2 class=" cta-title">{{t "This post is for paying subscribers only"}}</h2>
+								{{else}}
+								<h2 class=" cta-title">{{t "This post is for subscribers only"}}</h2>
+								{{/if}}
+								<a class="btn btn-primary" href="{{@site.url}}/signup/">{{t "Subscribe now"}}</a>
+								<p class="sign-in-cta"><small>{{t "Already have an account?"}} <a href="{{@site.url}}/signin/">{{t "Sign in"}}</a></small></p>
+							</div>
+							{{/if}}
+						</div>
+						{{> share-links}}
+						<div class="about-author-wrap">
+							{{> about-author}}
+						</div>
+						<div class="subscribe-box-wrap">
+							{{> subscribe-form-box}}
+						</div>
+						{{> prev-next}}
+						<div class="comment-wrap">
+							{{> comment}}
+						</div>
+					</div>
+				</div>
+			</div>
+		</article>
+</div>
+{{/post}}
+<!-- end content area -->

@@ -1,0 +1,45 @@
+{{!< default}}
+{{! The tag above means - insert everything in this file into the {body} of the default.hbs template }}
+
+<!-- start cover -->
+{{#author}}
+<section class="cover cover-author {{#if cover_image}}has-image{{/if}}" {{#if cover_image}} style="background-image: url({{cover_image}});"{{/if}}>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-offset-2 col-md-8">
+				<div class="cover-content-wrap align-center">
+					 <div class="avatar-wrap">
+						{{#if profile_image}}
+							<img src="{{profile_image}}" alt="Author image" class="avatar">
+							{{else}}
+							<img src="{{asset "images/default-user-image.jpg"}}" alt="Author image" class="avatar">
+						{{/if}}
+					</div>
+					<h1 class="author-name h3">{{name}}</h1>
+					<div class="meta-info">
+						<span class="post-count">{{t "Total"}} {{plural ../pagination.total empty=(t "0 Post") singular=(t "1 Post") plural=(t "% Posts")}}</span>
+						
+					</div>
+					{{#if bio}}
+					<p class="description">{{bio}}</p>
+					{{/if}}
+					<ul class="author-social">
+						{{#if twitter}}<li><a href="{{twitter_url twitter}}"><i class="fa fa-twitter"></i></a></li>{{/if}}
+						{{#if facebook}}<li><a href="{{facebook_url facebook}}"><i class="fa fa-facebook"></i></a></li>{{/if}}
+						{{#if website}}<li><a href="{{website}}" target="_blank"><i class="fa fa-globe"></i></a></li>{{/if}}
+						{{#if location}}<li class="location"><i class="fa fa-map-marker"></i>{{location}}</li>{{/if}}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{{/author}}
+<!-- end cover -->
+<!-- start content area -->
+<div class="main-content-area">
+	<div class="container post-listing">
+		{{> loop}}
+	</div>
+</div>
+<!-- end content area -->

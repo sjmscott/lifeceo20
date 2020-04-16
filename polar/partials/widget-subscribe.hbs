@@ -1,0 +1,29 @@
+{{#if @labs.members}}
+{{^if @member}}
+<div class="widget">
+	<h4 class="widget-title h6">{{t "Subscribe to {blogtitle}" blogtitle=@site.title}}</h4>
+	<div class="content tagcloud">
+		<section class="gh-subscribe">
+			<p>Get the latest posts delivered right to your inbox.</p>
+			<form data-members-form="subscribe" class="sign-up-form">
+				<div class="form-group">
+					<input data-members-email type="email" class="form-control" name="email" placeholder="{{t "Enter your email..."}}" required autocomplete="off"/>
+					<button class="btn btn-primary" type="submit"><span>{{t "Subscribe"}}</span></button>
+				</div>
+				<div class="error-box text-center">
+					<div class="message-loading">
+                            <span class="icon"></span>{{t "Please wait..."}}
+                        </div>
+					<div class="message-success">
+						<span class="icon"></span><strong>{{t "Great!"}}</strong> {{t "Check your inbox and click the link to complete sign in"}}
+					</div>
+					<div class="message-error">
+						<span class="icon"></span><strong>{{t "Error!"}}</strong> {{t "Please enter a valid email address!"}}
+					</div>
+				</div>
+			</form>
+		</section>
+	</div>
+</div>
+{{/if}}
+{{/if}}
